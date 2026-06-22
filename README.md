@@ -55,7 +55,25 @@ Requires [MLton](http://mlton.org/) and/or [Poly/ML](https://polyml.org/).
 make test        # MLton
 make test-poly   # Poly/ML
 make all-tests   # both
+make example     # build + run the demo
 make clean
+```
+
+## Demo
+
+[`examples/demo.sml`](examples/demo.sml) creates generators from fixed seeds
+and prints raw words in hex, integer draws, string tokens, and the first word
+of each half of a `split`. Because the state is immutable and all arithmetic is
+masked `Word64`, the output is identical on every run and on both compilers
+(the seed-0 words match the SplitMix64 reference vectors). Run it with:
+
+```
+$ make example
+first 3 words (seed 0): e220a8397b1dcdaf 6e789e6aa1b965f4 06c45d188009454f
+10 nextInt 6 (seed 7):  3 0 0 3 4 3 4 0 5 5
+hexToken 16 (seed 42):  532426d45efe67c2
+token 12 (seed 123):    pwyvqcyvbrda
+split (seed 999):       left=f374ee4c47c6faa8 right=482d8cc409c06222
 ```
 
 ## Installing with smlpkg

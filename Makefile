@@ -11,7 +11,7 @@ LIBDIR     := lib/github.com/sjqtentacles/sml-random
 TEST_MLB   := test/sources.mlb
 SRCS       := $(wildcard $(LIBDIR)/*.sml $(LIBDIR)/*.sig) $(wildcard test/*.sml) $(TEST_MLB) $(LIBDIR)/sources.mlb
 
-.PHONY: all test poly test-poly all-tests clean
+.PHONY: all test poly test-poly all-tests example clean
 
 all: $(BIN)/test-mlton
 
@@ -30,6 +30,12 @@ test-poly: $(BIN)/test-poly
 	$(BIN)/test-poly
 
 all-tests: test test-poly
+
+example: $(BIN)/demo
+	./$(BIN)/demo
+
+$(BIN)/demo: $(SRCS) examples/demo.sml examples/sources.mlb | $(BIN)
+	$(MLTON) -output $@ examples/sources.mlb
 
 $(BIN):
 	mkdir -p $(BIN)
